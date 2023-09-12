@@ -329,17 +329,15 @@ class AbstractChosen
     tmp.appendChild(element)
     tmp.innerHTML
 
-  `function get_single_html() {
-     var singleHtml = "<a class=\"chosen-single chosen-default\">\n  <span>" + this.default_text + "</span>\n  <div><b></b></div>\n</a>\n<div class=\"chosen-drop\">\n  <div class=\"chosen-search\">\n    <input class=\"chosen-search-input\" type=\"text\" autocomplete=\"off\" />\n  </div>\n  <ul class=\"chosen-results\"></ul>\n</div>";
-     if (window.trustedTypes && window.trustedTypes.createPolicy) {
-       var policy = self.trustedTypes.createPolicy('get-single-html-fix', {
-         createHTML: function(string) { return string;}
-       });
-       return policy.createHTML(singleHtml);
-     } else {
-       return singleHtml
-     }
-   }`
+  get_single_html: ->
+    singleHtml = '<a class="chosen-single chosen-default">\n  <span>' + @default_text + '</span>\n  <div><b></b></div>\n</a>\n<div class="chosen-drop">\n  <div class="chosen-search">\n    <input class="chosen-search-input" type="text" autocomplete="off" />\n  </div>\n  <ul class="chosen-results"></ul>\n</div>'
+    if window.trustedTypes and window.trustedTypes.createPolicy
+      policy = self.trustedTypes.createPolicy('get-single-html-fix', createHTML: (string) ->
+        string
+      )
+      policy.createHTML singleHtml
+    else
+      singleHtml
 
   get_multi_html: ->
     """
